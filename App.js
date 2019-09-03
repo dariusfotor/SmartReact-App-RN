@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { StyleSheet, Text, View, Button, } from 'react-native';
 import *as firebase from 'firebase';
-import { green, red } from 'ansi-colors';
+
 
 const config = {
   apiKey: "AIzaSyBwN5nkIv7tFYYLeL9nUBXr2TW43E76ZX8",
@@ -73,11 +73,11 @@ turnOffRelay_2=()=>{
         <View style={styles.switch}>
           <Text style={styles.switchTitle}>Jungikliai</Text>
           <Text style ={styles.switch1}>Pirma rele</Text>
-          <View style={this.turnOnRelay ? styles.systemOn: styles.systemOff}></View>
+          <View style={this.turnOnRelay ? styles.systemOn : styles.systemOff}></View>
           <Button style={styles.button} onPress={this.turnOnRelay} title="Ijungti"></Button>
           <Button style={styles.button} onPress={this.turnOffRelay} title="Isjungti"></Button>
           <Text style={styles.switch2}>Antra rele</Text>
-          <View style={this.turnOnRelay_2 ? styles.systemOn: styles.systemOff}></View>
+          <View style={this.turnOnRelay_2 ? styles.systemOn : styles.systemOff}></View>
           <Button style={styles.button} onPress={this.turnOnRelay_2} title="Ijungti"></Button>
           <Button style={styles.button} onPress={this.turnOffRelay_2} title="Isjungti"></Button>
         </View>
