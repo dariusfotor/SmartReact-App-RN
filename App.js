@@ -20,9 +20,11 @@ export default class App extends React.Component{
     this.state={
       turnOn: 1,
       turnOff: 0,
+      relay_status: "",
+      relay_status_2: "",
       tempFRBase: "",
       humidFRBase: "",
-      temp_over: ''
+      temp_over: '',
     }
     this.db_relay = firebase.database().ref().child('Reles_busena');
     this.db_relay_2 = firebase.database().ref().child('Reles_busena_2');
@@ -42,6 +44,20 @@ export default class App extends React.Component{
     this.db_temp_over.orderByKey().limitToLast(2).on('value', temp_over=>{
       this.setState({
         temp_over: temp_over.val()
+      })
+    }
+    )
+    //Reles status
+    this.db_relay.on('value', data=>{
+      this.setState({
+        relay_status: data.val()
+      })
+    }
+    )
+    //Reles status 2
+    this.db_relay_2.on('value', data=>{
+      this.setState({
+        relay_status_2: data.val()
       })
     }
     )
@@ -96,11 +112,11 @@ getTempOver(){
         <View style={styles.switch}>
           <Text style={styles.switchTitle}>Jungikliai</Text>
           <Text style ={styles.switch1}>Pirma rele</Text>
-          <View style={relay1===true ? styles.systemOn : styles.systemOff}></View>
+          <View style={this.state.relay_status===1 ? styles.systemOn : styles.systemOff}></View>
           <Button style={styles.button} onPress={this.turnOnRelay } title="Ijungti"></Button>
           <Button style={styles.button} onPress={this.turnOffRelay} title="Isjungti"></Button>
           <Text style={styles.switch2}>Antra rele</Text>
-          <View style={relay2===true ? styles.systemOn : styles.systemOff}></View>
+          <View style={this.state.relay_status_2 ? styles.systemOn : styles.systemOff}></View>
           <Button style={styles.button} onPress={this.turnOnRelay_2} title="Ijungti"></Button>
           <Button style={styles.button} onPress={this.turnOffRelay_2} title="Isjungti"></Button>
         </View>
